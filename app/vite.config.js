@@ -10,7 +10,10 @@ const host = process.env.APP_DOMAIN; // [tl! 追加]
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.jsx',
+            input: [
+                'resources/js/app.jsx',
+                'resources/js/Pages/Other/Index.jsx',
+                ],
             refresh: true,
         }),
         react(),
