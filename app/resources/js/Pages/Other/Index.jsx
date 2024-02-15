@@ -1,8 +1,9 @@
 import { usePage } from "@inertiajs/react"
 import { css } from "@emotion/react"
+import { useMediaQuery } from "@mui/material"
+import { defaultTheme, DefaultThemeProvider } from "@/Components/defaultThemeProvider"
 
-import { DefaultThemeProvider } from "@/Components/defaultThemeProvider"
-
+import VideoImage from "@/Components/Other/Indexs/VideoImage"
 import Video from "@/Components/Other/Indexs/Video"
 import Particles from "@/Components/Other/Indexs/Particles"
 import SiteLink from "@/Components/Other/Indexs/SiteLink"
@@ -11,6 +12,10 @@ import { Stack } from "@mui/material"
 
 /** @jsxImportSource @emotion/react */
 export default function Index () {
+	const bp = defaultTheme().breakpoints
+	// max-widthなので、tablet幅未満はtrueを返す。つまり、mobile幅ならtrue。
+    const isMobile = useMediaQuery(`(max-width:${(bp.values.tablet - 0.001)}px)`);
+
     const domain = usePage().props.domain
 
     return (<DefaultThemeProvider>
@@ -39,7 +44,8 @@ export default function Index () {
                 position:relative;
                 margin:0 auto;
             `}>
-                <Video />
+                { isMobile? <VideoImage /> : <Video /> }
+
                 <Particles style={{
                     position:'absolute',
                     top:0,
