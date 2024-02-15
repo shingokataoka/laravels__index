@@ -89,7 +89,7 @@ export default function Index () {
                padding:16px 16px 64px 16px;
                 * { text-align:center; }
                 a {
-                    max-width:600px;
+                    max-width:630px;
                     width:100%;
                     background: #333;
                     border: 1px #888 solid;
