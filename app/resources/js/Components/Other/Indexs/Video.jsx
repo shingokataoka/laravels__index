@@ -93,7 +93,7 @@ const Video = () => {
             background:'rgba(0,0,0,0.3)',
             color: 'transparent',
         }}>{str.map((row, index) => (
-            <span key={index}>{row}</span>
+            <span key={index} style={{color:'#0000'}}>{row}</span>
         ))}</div>
 
         {/* 光る文字本体。 */}

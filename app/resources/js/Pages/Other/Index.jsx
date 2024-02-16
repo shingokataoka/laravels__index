@@ -18,6 +18,8 @@ export default function Index () {
 
     const domain = usePage().props.domain
 
+    // スマホ幅の場合の
+
     return (<DefaultThemeProvider>
         <style>{`
             body {
@@ -44,13 +46,13 @@ export default function Index () {
                 position:relative;
                 margin:0 auto;
             `}>
-                { isMobile? <VideoImage /> : <Video /> }
+                { isMobile?
+                    <VideoImage />
+                : <>
+                    <Video />
+                    <Particles />
+                </> }
 
-                <Particles style={{
-                    position:'absolute',
-                    top:0,
-                    left:0,
-                }} />
             </div>
 
             {/* サイト説明 */}

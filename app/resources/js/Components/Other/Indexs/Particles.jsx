@@ -4,10 +4,13 @@ import particles from '@/Libs/particles/particles'
 
 const Particles = props => {
     const style = {
-        ...props.style,
+        position:'absolute',
+        top:0,
+        left:0,
         width: '100%',
         height: '100%',
         opacity: 0.5,
+        ...props.style,
     }
 
     // scriptタグを入れる変数
@@ -32,7 +35,9 @@ const Particles = props => {
 
     return (<>
         {/* パーティクルを描画するコンテナ */}
-        <div id="particles-js" style={style}></div>
+        <div id="particles-js" style={style}
+            ref={props.particleRef}
+        ></div>
     </>)
 }
 

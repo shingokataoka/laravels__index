@@ -1,8 +1,16 @@
-import {useEffect} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import ReactPlayer from 'react-player'
 
+import { css } from '@emotion/react'
 
+import Particles from './Particles'
+
+
+/** @jsxImportSource @emotion/react */
 const VideoImage = () => {
+    const [particleShow, setParticleShow] = useState(false)
+    const particleRef = useRef(null)
+
 
     const shineDivStyle = {
         position:'absolute',
@@ -53,21 +61,37 @@ const VideoImage = () => {
     let delay = 0
     const start = () => {
         str.map((row, index) => {
-        delay =(typeof row !== "string")? delay + 0.35 : delay + 0.02*len
-        const elem = document.getElementById(`shine${index}`)
-        setTimeout(() => {
-            elem.classList.add('shine_anime')
-        }, 1000 * delay)
+            delay =(typeof row !== "string")? delay + 0.35 : delay + 0.02*len
+            const elem = document.getElementById(`shine${index}`)
+            setTimeout(() => {
+                elem.classList.add('shine_anime')
+            }, 1000 * delay)
         })
+
+        // 光る文字表示アニメーションが終了後、パーティクルを表示
+        delay = delay + 0.35
+        setTimeout(() => { setParticleShow(true) }, 1000 * delay)
+        delay = delay + 0.35
+        setTimeout(() => {
+            particleRef.current.style.opacity = 0.6
+        }, 1000 * delay)
+    }
+
+
+    // Video画像を読み込んでから「光る文字表示」アニメーションをする。
+    const img = new Image()
+    img.src = '/images/video.png'
+    img.onload = () => {
+        start()
     }
 
     // アニメーションを付ける関数を開始。
-    useEffect(() => {
-        const timeoutID = setTimeout(() => {
-            start()
-        }, 500)
-        // return clearTimeout(timeoutID)
-    }, [])
+    // useEffect(() => {
+    //     const timeoutID = setTimeout(() => {
+    //         start()
+    //     }, 500)
+    //     // return clearTimeout(timeoutID)
+    // }, [])
 
 
 
@@ -104,19 +128,18 @@ const VideoImage = () => {
       }
     `}</style>
 
-
+    {/* Video画像と光る文字 */}
      <div style={{position:'relative', outline:'red 1px saolid', padding:0, margin:0}}>
 
-      <img src="/images/video.png" />
+      <img src={img.src} />
 
         {/* 光るテキストの背景色。微妙に暗くする。 */}
         <div style={{
             ...shineDivStyle,
             filter:'blur(7px)',
             background:'rgba(0,0,0,0.3)',
-            color: 'transparent',
         }}>{str.map((row, index) => (
-            <span key={index}>{row}</span>
+            <span key={index} style={{ color:'#0000' }}>{row}</span>
         ))}</div>
 
         {/* 光る文字本体。 */}
@@ -125,6 +148,20 @@ const VideoImage = () => {
         ))}</div>
 
     </div>
+
+
+    {/* パーティクル。光る文字表示後に表示する。 */}
+    { !particleShow? '' :
+        <Particles
+            particleRef={particleRef}
+            style={{
+                transition:'all 0.6s',
+                opacity: 0,
+            }}
+        />
+    }
+
+
   </>)
 }
 
