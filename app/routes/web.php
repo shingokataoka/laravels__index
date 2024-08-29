@@ -32,6 +32,11 @@ Route::get('/', function () {
 })->name('index');
 
 
+// 英会話めもっくを開く前の説明ページ。
+Route::get('english_memoc_description', function () {
+    return Inertia::render('Other/EnglishMemocDescription');
+})->name('english_memoc_description');
+
 
 
 // Route::get('/dashboard', function () {

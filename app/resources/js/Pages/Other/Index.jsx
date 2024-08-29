@@ -113,6 +113,21 @@ export default function Index () {
                 <h2>作成したサイト 一覧</h2>
 
                 <SiteLink
+                    imageFilename={'english_memoc_thumbnail.png'}
+                    siteUrl={route('english_memoc_description')}
+                >
+                    英会話の練習webアプリ
+                    <hr css={css`
+                        border-color: #fff2;
+                    `} />
+                    <span css={css`
+                        font-size: 0.9rem !important;
+                    `}>
+                        「セリフをメモして練習しまくりたい」と思い、私自身も使いたいアプリを目指し作りました。<br />
+                        一番見て欲しいサイトです。
+                    </span>
+                </SiteLink>
+                <SiteLink
                     imageFilename={'sk_marche_thumbnail.png'}
                     siteUrl={`https://sk-marche.${domain}`}
                 >
@@ -162,6 +177,11 @@ export default function Index () {
                     現在ページのgithubです。
                 </a>
 
+                <a href="https://github.com/shingokataoka/laravels__english_memoc">
+                    laravels__english_memoc<br />
+                    上記「英会話の練習webアプリ」の<br />
+                    guthubです。
+                </a>
                 <a href="https://github.com/shingokataoka/laravels__sk_marche">
                     laravels__sk_marche<br />
                     上記「Stripe（テスト環境）を 決済導入したECサイト」の<br />
